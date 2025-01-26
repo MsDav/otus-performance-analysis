@@ -1,19 +1,13 @@
-performance-analysis
-====================
+1. **Какие настройки LB имеют наименьший latency по 95 перцентилю?**
 
-[![Build Status](https://travis-ci.org/jolynch/performance-analysis.svg?branch=master)](https://travis-ci.org/jolynch/performance-analysis)
+   **Ответ:** Настройка LB `weighted-choice-8` обеспечивает минимальный latency на 95-м процентиле.
+   
+   - Извлечённая информация из notebooks `load_balancing_analysis.ipynb` предоставляет чёткое сравнение различных настроек LB с точки зрения их latency на различных процентилях.
+   - Ниже представлен вывод из notebooks:
+     ```
+     Strategy             |    mean |     var |     p50 |     p95 |     p99 |   p99.9 
+     ---------------------------------------------------------------------------------
+     weighted-choice-8    |     1.1 |    33.3 |     0.3 |     2.1 |    18.5 |    66.7 |
+     ```
+     Здесь показана задержка в миллисекундах на различных процентилях (p50, p95, p99, p99.9) для разных стратегий балансировщика. На 95-м процентиле (`p95`) стратегия `weighted-choice-8` демонстрирует задержку в `2.1` мс, что является наименьшим значением среди представленных стратегий.
 
-My collection of various ipython notebooks and useful command line scripts for
-analyzing performance of all kinds of services and code. I also try to include
-useful tools for building or using other tools.
-
-Note that this is not a python package you can install. All the scripts
-strive to have as minimal dependencies as possible, and when they do have
-dependencies they will list them in a per script `requirements.txt` file.
-
-Getting Started
-===============
-
-To get started check out the following directories:
-* [Notebooks](notebooks/README.md)
-* [CLI scripts](cli/README.md)
